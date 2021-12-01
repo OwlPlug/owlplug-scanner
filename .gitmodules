@@ -1,3 +1,6 @@
 [submodule "JUCE"]
 	path = JUCE
 	url = https://github.com/juce-framework/JUCE
+[submodule "modules/vst2sdk"]
+	path = modules/vst2sdk
+	url = https://github.com/OwlPlug/vst2sdk
