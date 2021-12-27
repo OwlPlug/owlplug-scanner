@@ -1,0 +1,58 @@
+name: Owlplug Scanner
+
+on: 
+  push:
+    branches:
+      - master
+
+jobs:
+  build-win:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2.3.5
+      with:
+        fetch-depth: 0
+        submodules: recursive
+        token: ${{ secrets.REPO_ACCESS_TOKEN }}
+    - name: "Download Projucer"
+      run: ./build/download-projucer.sh
+      shell: bash
+      env:
+        OS: windows
+    - name: Get Scanner Version
+      run: Write-Host ::set-output name=version::$((Select-Xml -Path owlplug-scanner.jucer -XPath "//JUCERPROJECT/@version").Node.Value)
+      id: get-version
+    - name: "Build Scanner"
+      run: ./build/build-win.sh
+      shell: bash
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2.2.4
+      with:
+        name: owlplug-scanner-win
+        path: ./Builds/VisualStudio2019/x64/Release/Dynamic Library/owlplug-scanner-${{ steps.get-version.outputs.version }}.dll
+  build-osx:
+    runs-on: macos-10.15
+    steps:
+    - uses: actions/checkout@v2.3.5
+      with:
+        fetch-depth: 0
+        submodules: recursive
+        token: ${{ secrets.REPO_ACCESS_TOKEN }}
+    - name: "Download Projucer"
+      run: ./build/download-projucer.sh
+      shell: bash
+      env:
+        OS: osx
+    - name: Install XmlStarlet
+      run: brew install xmlstarlet
+    - name: Get Scanner Version
+      run: echo ::set-output name=version::$(xmlstarlet sel -t -v 'string(//JUCERPROJECT/@version)' owlplug-scanner.jucer)
+      id: get-version
+    - name: "Build OSX"
+      run: ./build/build-osx.sh
+      shell: bash
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2.2.4
+      with:
+        name: owlplug-scanner-osx
+        path: ./Builds/MacOSX/build/Release/owlplug-scanner-${{ steps.get-version.outputs.version }}.dylib
