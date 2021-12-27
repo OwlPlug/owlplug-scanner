@@ -29,7 +29,7 @@ jobs:
       uses: actions/upload-artifact@v2.2.4
       with:
         name: owlplug-scanner-win
-        path: ./Builds/VisualStudio2019/x64/Release/Dynamic Library/owlplug-scanner-${{ steps.get-version.outputs.version }}.dll
+        path: ./Builds/VisualStudio2019/x64/Release/ConsoleApp/owlplug-scanner-${{ steps.get-version.outputs.version }}.exe
   build-osx:
     runs-on: macos-10.15
     steps:
@@ -55,4 +55,4 @@ jobs:
       uses: actions/upload-artifact@v2.2.4
       with:
         name: owlplug-scanner-osx
-        path: ./Builds/MacOSX/build/Release/owlplug-scanner-${{ steps.get-version.outputs.version }}.dylib
+        path: ./Builds/MacOSX/build/Release/owlplug-scanner-${{ steps.get-version.outputs.version }}
