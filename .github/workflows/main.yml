@@ -56,3 +56,21 @@ jobs:
       with:
         name: owlplug-scanner-osx
         path: ./Builds/MacOSX/build/Release/owlplug-scanner-${{ steps.get-version.outputs.version }}
+  release:
+    name: "Release"
+    needs: [build-win, build-osx]
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: actions/checkout@v2.3.5
+      - name: Retrieve artifacts
+        uses: actions/download-artifact@v2
+        with:
+          path: ./build
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.REPO_ACCESS_TOKEN }}"
+          prerelease: false
+          automatic_release_tag: latest
+          title: OwlPlug Scanner Release
+          files: |
+            owlplug-scanner*
