@@ -39,7 +39,7 @@ int main (int argc, char* argv[])
 	}
 
 	if (pluginDescriptions.size() == 0) {
-		std::cout << "\nError: No plugin detected in the given p^lugin file ";
+		std::cout << "\nError: No plugin has been detected in the given file ";
 		std::cout << pluginPath;
 		return -1;
 	}
