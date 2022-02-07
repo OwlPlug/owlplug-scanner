@@ -71,6 +71,7 @@ jobs:
           repo_token: "${{ secrets.REPO_ACCESS_TOKEN }}"
           prerelease: false
           automatic_release_tag: latest
-          title: OwlPlug Scanner Release
+          title: OwlPlug Scanner Latest
           files: |
-            owlplug-scanner*
+            build/owlplug-scanner-osx/*
+            build/owlplug-scanner-win/*
