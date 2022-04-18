@@ -40,7 +40,7 @@ namespace ProjectInfo
 {
     const char* const  projectName    = "owlplug-scanner";
     const char* const  companyName    = "";
-    const char* const  versionString  = "0.0.3";
-    const int          versionNumber  = 0x3;
+    const char* const  versionString  = "0.0.4";
+    const int          versionNumber  = 0x4;
 }
 #endif
