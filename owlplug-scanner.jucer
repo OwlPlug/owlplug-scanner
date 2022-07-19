@@ -2,7 +2,7 @@
 
 <JUCERPROJECT id="yoeos4" name="owlplug-scanner" projectType="consoleapp" useAppConfig="0"
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
-              version="0.0.4">
+              version="0.0.5">
   <MAINGROUP id="JMs2NX" name="owlplug-scanner">
     <GROUP id="{EE1B3A07-2402-FE08-C1B3-50215E94E56A}" name="Source">
       <FILE id="NFqrO9" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
