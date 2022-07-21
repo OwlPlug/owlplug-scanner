@@ -15,7 +15,7 @@ int main (int argc, char* argv[])
 
 	if (argc != 2) {
 		std::cout << "\nError: Wrong program argument number";
-		std::cout << "\nYou must add an audio plugin path: ./owlplug-scanner /path/to/plugin";
+		std::cout << "\nYou must add an audio plugin path or identifier: ./owlplug-scanner /path/to/plugin\n";
 		return -1;
 	}
 
@@ -41,10 +41,16 @@ int main (int argc, char* argv[])
 	if (pluginDescriptions.size() == 0) {
 		std::cout << "\nError: No plugin has been detected in the given file ";
 		std::cout << pluginPath;
+		std::cout << "\n";
 		return -1;
 	}
 
-	std::cout << pluginDescriptions[0]->createXml()->toString();
+	for (int i = 0; i < pluginDescriptions.size(); i++) {
+		std::cout << "\n---BEGIN PLUGIN COMPONENT DELIMITER---\n";
+		std::cout << pluginDescriptions[i]->createXml()->toString();
+		std::cout << "\n---END PLUGIN COMPONENT DELIMITER---";
+
+	}
 
     return 0;
 }
