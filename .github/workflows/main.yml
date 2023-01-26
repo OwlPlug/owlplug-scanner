@@ -2,8 +2,8 @@ name: Owlplug Scanner
 
 on: 
   push:
-    branches:
-      - master
+    branches: 
+      - '**'
 
 jobs:
   build-win:
@@ -20,7 +20,7 @@ jobs:
       env:
         OS: windows
     - name: Get Scanner Version
-      run: Write-Host ::set-output name=version::$((Select-Xml -Path owlplug-scanner.jucer -XPath "//JUCERPROJECT/@version").Node.Value)
+      run: echo "version=$((Select-Xml -Path owlplug-scanner.jucer -XPath '//JUCERPROJECT/@version').Node.Value)" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
       id: get-version
     - name: "Build Scanner"
       run: ./build/build-win.sh
@@ -29,9 +29,9 @@ jobs:
       uses: actions/upload-artifact@v2.2.4
       with:
         name: owlplug-scanner-win
-        path: ./Builds/VisualStudio2019/x64/Release/ConsoleApp/owlplug-scanner-${{ steps.get-version.outputs.version }}-win.exe
+        path: ./Builds/VisualStudio2019/x64/Release/ConsoleApp/owlplug-scanner-${{ env.version }}-win.exe
   build-osx:
-    runs-on: macos-10.15
+    runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2.3.5
       with:
@@ -46,7 +46,7 @@ jobs:
     - name: Install XmlStarlet
       run: brew install xmlstarlet
     - name: Get Scanner Version
-      run: echo ::set-output name=version::$(xmlstarlet sel -t -v 'string(//JUCERPROJECT/@version)' owlplug-scanner.jucer)
+      run: echo "version=$(xmlstarlet sel -t -v 'string(//JUCERPROJECT/@version)' owlplug-scanner.jucer)" >> $GITHUB_ENV
       id: get-version
     - name: "Build OSX"
       run: ./build/build-osx.sh
@@ -55,7 +55,7 @@ jobs:
       uses: actions/upload-artifact@v2.2.4
       with:
         name: owlplug-scanner-osx
-        path: ./Builds/MacOSX/build/Release/owlplug-scanner-${{ steps.get-version.outputs.version }}-osx
+        path: ./Builds/MacOSX/build/Release/owlplug-scanner-${{ env.version }}-osx
   build-linux:
     runs-on: ubuntu-latest
     steps:
@@ -76,21 +76,22 @@ jobs:
     - name: Install XmlStarlet
       run: sudo apt install xmlstarlet
     - name: Get Scanner Version
-      run: echo ::set-output name=version::$(xmlstarlet sel -t -v 'string(//JUCERPROJECT/@version)' owlplug-scanner.jucer)
+      run: echo "version=$(xmlstarlet sel -t -v 'string(//JUCERPROJECT/@version)' owlplug-scanner.jucer)" >> $GITHUB_ENV
       id: get-version
     - name: "Build Linux"
       run: ./build/build-linux.sh
       shell: bash
     - name: Add version in binary name
-      run: mv ./Builds/LinuxMakefile/build/owlplug-scanner-linux ./Builds/LinuxMakefile/build/owlplug-scanner-${{ steps.get-version.outputs.version }}-linux
+      run: mv ./Builds/LinuxMakefile/build/owlplug-scanner-linux ./Builds/LinuxMakefile/build/owlplug-scanner-${{ env.version }}-linux
     - name: Upload Artifact
       uses: actions/upload-artifact@v2.2.4
       with:
         name: owlplug-scanner-linux
-        path: ./Builds/LinuxMakefile/build/owlplug-scanner-${{ steps.get-version.outputs.version }}-linux
+        path: ./Builds/LinuxMakefile/build/owlplug-scanner-${{ env.version }}-linux
   release:
     name: "Release"
     needs: [build-win, build-osx, build-linux]
+    if: github.ref == 'refs/heads/master'
     runs-on: "ubuntu-latest"
     steps:
       - uses: actions/checkout@v2.3.5
