@@ -26,7 +26,7 @@ jobs:
       run: ./build/build-win.sh
       shell: bash
     - name: Upload Artifact
-      uses: actions/upload-artifact@v2.2.4
+      uses: actions/upload-artifact@v3.1.2
       with:
         name: owlplug-scanner-win
         path: ./Builds/VisualStudio2019/x64/Release/ConsoleApp/owlplug-scanner-${{ env.version }}-win.exe
@@ -52,7 +52,7 @@ jobs:
       run: ./build/build-osx.sh
       shell: bash
     - name: Upload Artifact
-      uses: actions/upload-artifact@v2.2.4
+      uses: actions/upload-artifact@v3.1.2
       with:
         name: owlplug-scanner-osx
         path: ./Builds/MacOSX/build/Release/owlplug-scanner-${{ env.version }}-osx
@@ -84,7 +84,7 @@ jobs:
     - name: Add version in binary name
       run: mv ./Builds/LinuxMakefile/build/owlplug-scanner-linux ./Builds/LinuxMakefile/build/owlplug-scanner-${{ env.version }}-linux
     - name: Upload Artifact
-      uses: actions/upload-artifact@v2.2.4
+      uses: actions/upload-artifact@v3.1.2
       with:
         name: owlplug-scanner-linux
         path: ./Builds/LinuxMakefile/build/owlplug-scanner-${{ env.version }}-linux
