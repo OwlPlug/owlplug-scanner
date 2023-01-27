@@ -96,7 +96,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3.3.0
       - name: Retrieve artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           path: ./build
       - uses: "marvinpinto/action-automatic-releases@latest"
