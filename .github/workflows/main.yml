@@ -9,7 +9,7 @@ jobs:
   build-win:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v3.3.0
+    - uses: actions/checkout@v3.5.0
       with:
         fetch-depth: 0
         submodules: recursive
@@ -33,7 +33,7 @@ jobs:
   build-osx:
     runs-on: macos-latest
     steps:
-    - uses: actions/checkout@v3.3.0
+    - uses: actions/checkout@v3.5.0
       with:
         fetch-depth: 0
         submodules: recursive
@@ -59,7 +59,7 @@ jobs:
   build-linux:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3.3.0
+    - uses: actions/checkout@v3.5.0
       with:
         fetch-depth: 0
         submodules: recursive
@@ -94,7 +94,7 @@ jobs:
     if: github.ref == 'refs/heads/master'
     runs-on: "ubuntu-latest"
     steps:
-      - uses: actions/checkout@v3.3.0
+      - uses: actions/checkout@v3.5.0
       - name: Retrieve artifacts
         uses: actions/download-artifact@v3
         with:
