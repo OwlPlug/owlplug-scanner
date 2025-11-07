@@ -57,7 +57,7 @@ jobs:
         name: owlplug-scanner-osx
         path: ./Builds/MacOSX/build/Release/owlplug-scanner-${{ env.version }}-osx
   build-linux:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
     - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       with:
@@ -72,7 +72,7 @@ jobs:
     - name : Update packages
       run: sudo apt update
     - name : Install Juce dev dependencies
-      run: sudo apt install libasound2-dev libcurl4-openssl-dev libx11-dev libxcomposite-dev libxcursor-dev libxext-dev libxinerama-dev libxrandr-dev libxrender-dev
+      run: sudo apt install libasound2-dev libcurl4-openssl-dev libx11-dev libxcomposite-dev libxcursor-dev libxext-dev libxinerama-dev libxrandr-dev libxrender-dev libfreetype-dev libfreetype6-dev libfontconfig1-dev
     - name: Install XmlStarlet
       run: sudo apt install xmlstarlet
     - name: Get Scanner Version
