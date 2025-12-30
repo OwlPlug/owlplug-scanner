@@ -51,7 +51,8 @@
     <LINUX_MAKE targetFolder="Builds/LinuxMakefile" vstLegacyFolder="./modules/vst2sdk"
                 extraLinkerFlags="-Wl,--as-needed">
       <CONFIGURATIONS>
-        <CONFIGURATION isDebug="1" name="Debug" targetName="owlplug-scanner-linux" userNotes="Version can't be set to the linux binary name (multiple dots in the filename)"/>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="owlplug-scanner-linux"
+                       userNotes="Version can't be set to the linux binary name (multiple dots in the filename)"/>
         <CONFIGURATION isDebug="0" name="Release" targetName="owlplug-scanner-linux"
                        userNotes="Version can't be set to the linux binary name (multiple dots in the filename)"/>
       </CONFIGURATIONS>
