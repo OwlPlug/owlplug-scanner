@@ -2,7 +2,7 @@
 
 <JUCERPROJECT id="yoeos4" name="owlplug-scanner" projectType="consoleapp" useAppConfig="0"
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
-              version="0.3.0" cppLanguageStandard="20">
+              version="0.4.0" cppLanguageStandard="20">
   <MAINGROUP id="JMs2NX" name="owlplug-scanner">
     <GROUP id="{EE1B3A07-2402-FE08-C1B3-50215E94E56A}" name="Source">
       <FILE id="NFqrO9" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
@@ -12,7 +12,8 @@
                JUCE_PLUGINHOST_AU="1" JUCE_WEB_BROWSER="0" JUCE_USE_CURL="0"
                JUCE_PLUGINHOST_LV2="1"/>
   <EXPORTFORMATS>
-    <VS2019 targetFolder="Builds/VisualStudio2019" vstLegacyFolder="./modules/vst2sdk">
+    <VS2019 targetFolder="Builds/VisualStudio2019" vstLegacyFolder="./modules/vst2sdk"
+            userNotes="DEPRECATED - Use VisualStudio2022 Exporter instead. Remove on next JUCE upgrade.">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug" targetName="owlplug-scanner-${JUCE_APP_VERSION}-win"/>
         <CONFIGURATION isDebug="0" name="Release" targetName="owlplug-scanner-${JUCE_APP_VERSION}-win"/>
@@ -68,6 +69,24 @@
         <MODULEPATH id="juce_audio_basics" path="./JUCE/modules"/>
       </MODULEPATHS>
     </LINUX_MAKE>
+    <VS2022 targetFolder="Builds/VisualStudio2022" vstLegacyFolder="./modules/vst2sdk">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="owlplug-scanner-${JUCE_APP_VERSION}-win"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="owlplug-scanner-${JUCE_APP_VERSION}-win"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="./JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="./JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="./JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="./JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="./JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="./JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="./JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="./JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="./JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="./JUCE/modules"/>
+      </MODULEPATHS>
+    </VS2022>
   </EXPORTFORMATS>
   <MODULES>
     <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
