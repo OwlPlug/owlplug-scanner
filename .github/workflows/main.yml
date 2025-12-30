@@ -32,12 +32,12 @@ jobs:
       run: ./build/build-win.sh
       shell: bash
     - name: Add architecture to filename
-      run: mv ./Builds/VisualStudio2019/${{ matrix.arch }}/Release/ConsoleApp/owlplug-scanner-${{ env.version }}-win.exe ./Builds/VisualStudio2019/${{ matrix.arch }}/Release/ConsoleApp/owlplug-scanner-${{ env.version }}-win-${{ matrix.arch }}.exe
+      run: mv ./Builds/VisualStudio2022/${{ matrix.arch }}/Release/ConsoleApp/owlplug-scanner-${{ env.version }}-win.exe ./Builds/VisualStudio2022/${{ matrix.arch }}/Release/ConsoleApp/owlplug-scanner-${{ env.version }}-win-${{ matrix.arch }}.exe
     - name: Upload Artifact
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
       with:
-        name: owlplug-scanner-win
-        path: ./Builds/VisualStudio2019/${{ matrix.arch }}/Release/ConsoleApp/owlplug-scanner-${{ env.version }}-win-${{ matrix.arch }}.exe
+        name: owlplug-scanner-win-${{ matrix.arch }}
+        path: ./Builds/VisualStudio2022/${{ matrix.arch }}/Release/ConsoleApp/owlplug-scanner-${{ env.version }}-win-${{ matrix.arch }}.exe
   build-osx:
     strategy:
       matrix:
