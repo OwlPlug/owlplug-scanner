@@ -34,7 +34,7 @@ jobs:
     - name: Add architecture to filename
       run: mv ./Builds/VisualStudio2022/${{ matrix.arch }}/Release/ConsoleApp/owlplug-scanner-${{ env.version }}-win.exe ./Builds/VisualStudio2022/${{ matrix.arch }}/Release/ConsoleApp/owlplug-scanner-${{ env.version }}-win-${{ matrix.arch }}.exe
     - name: Upload Artifact
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+      uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
       with:
         name: owlplug-scanner-win-${{ matrix.arch }}
         path: ./Builds/VisualStudio2022/${{ matrix.arch }}/Release/ConsoleApp/owlplug-scanner-${{ env.version }}-win-${{ matrix.arch }}.exe
@@ -70,7 +70,7 @@ jobs:
     - name: Add architecture to filename
       run: mv ./Builds/MacOSX/build/Release/owlplug-scanner-${{ env.version }}-osx ./Builds/MacOSX/build/Release/owlplug-scanner-${{ env.version }}-osx-${{matrix.arch}}
     - name: Upload Artifact
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+      uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
       with:
         name: owlplug-scanner-osx-${{ matrix.arch }}
         path: ./Builds/MacOSX/build/Release/owlplug-scanner-${{ env.version }}-osx-${{ matrix.arch }}
@@ -112,7 +112,7 @@ jobs:
     - name: Add version and architecture to filename
       run: mv ./Builds/LinuxMakefile/build/owlplug-scanner-linux ./Builds/LinuxMakefile/build/owlplug-scanner-${{ env.version }}-linux-${{matrix.arch}}
     - name: Upload Artifact
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+      uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
       with:
         name: owlplug-scanner-linux-${{ matrix.arch }}
         path: ./Builds/LinuxMakefile/build/owlplug-scanner-${{ env.version }}-linux-${{ matrix.arch }}
