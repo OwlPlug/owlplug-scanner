@@ -9,9 +9,10 @@ jobs:
   build-win:
     strategy:
       matrix:
-        arch: [x64]
+        platform: [win-x64]
         include:
-          - arch: x64
+          - platform: win-x64
+            arch: x64
             os: windows-latest
     runs-on: ${{ matrix.os }}
     steps:
@@ -32,20 +33,22 @@ jobs:
       run: ./build/build-win.sh
       shell: bash
     - name: Add architecture to filename
-      run: mv ./Builds/VisualStudio2022/${{ matrix.arch }}/Release/ConsoleApp/owlplug-scanner-${{ env.version }}-win.exe ./Builds/VisualStudio2022/${{ matrix.arch }}/Release/ConsoleApp/owlplug-scanner-${{ env.version }}-win-${{ matrix.arch }}.exe
+      run: mv ./Builds/VisualStudio2022/${{ matrix.arch }}/Release/ConsoleApp/owlplug-scanner-${{ env.version }}-win.exe ./Builds/VisualStudio2022/${{ matrix.arch }}/Release/ConsoleApp/owlplug-scanner-${{ env.version }}-${{ matrix.platform }}
     - name: Upload Artifact
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
       with:
-        name: owlplug-scanner-win-${{ matrix.arch }}
-        path: ./Builds/VisualStudio2022/${{ matrix.arch }}/Release/ConsoleApp/owlplug-scanner-${{ env.version }}-win-${{ matrix.arch }}.exe
+        name: owlplug-scanner-${{ matrix.platform }}
+        path: ./Builds/VisualStudio2022/${{ matrix.arch }}/Release/ConsoleApp/owlplug-scanner-${{ env.version }}-${{ matrix.platform }}
   build-osx:
     strategy:
       matrix:
-        arch: [x64, arm64]
+        platform: [osx-x64, osx-arm64]
         include:
-          - arch: x64
+          - platform: osx-x64
+            arch: x64
             os: macos-15-intel
-          - arch: arm64
+          - platform: osx-arm64
+            arch: arm64
             os: macos-15
     runs-on: ${{ matrix.os }}
     steps:
@@ -68,18 +71,19 @@ jobs:
       run: ./build/build-osx.sh
       shell: bash
     - name: Add architecture to filename
-      run: mv ./Builds/MacOSX/build/Release/owlplug-scanner-${{ env.version }}-osx ./Builds/MacOSX/build/Release/owlplug-scanner-${{ env.version }}-osx-${{matrix.arch}}
+      run: mv ./Builds/MacOSX/build/Release/owlplug-scanner-${{ env.version }}-osx ./Builds/MacOSX/build/Release/owlplug-scanner-${{ env.version }}-${{ matrix.platform }}
     - name: Upload Artifact
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
       with:
-        name: owlplug-scanner-osx-${{ matrix.arch }}
-        path: ./Builds/MacOSX/build/Release/owlplug-scanner-${{ env.version }}-osx-${{ matrix.arch }}
+        name: owlplug-scanner-${{ matrix.platform }}
+        path: ./Builds/MacOSX/build/Release/owlplug-scanner-${{ env.version }}-osx-${{ matrix.platform }}
   build-linux:
     strategy:
       matrix:
-        arch: [x64]
+        platform: [linux-x64]
         include:
-          - arch: x64
+          - platform: linux-x64
+            arch: x64
             os: ubuntu-24.04
           # Projucer is only distributed for x64/amd64 linux.
           # The projucer is required to generate the Makefile, but the build can be run for arm64 after that.
@@ -110,12 +114,12 @@ jobs:
       run: ./build/build-linux.sh
       shell: bash
     - name: Add version and architecture to filename
-      run: mv ./Builds/LinuxMakefile/build/owlplug-scanner-linux ./Builds/LinuxMakefile/build/owlplug-scanner-${{ env.version }}-linux-${{matrix.arch}}
+      run: mv ./Builds/LinuxMakefile/build/owlplug-scanner-linux ./Builds/LinuxMakefile/build/owlplug-scanner-${{ env.version }}-${{ matrix.platform }}
     - name: Upload Artifact
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
       with:
-        name: owlplug-scanner-linux-${{ matrix.arch }}
-        path: ./Builds/LinuxMakefile/build/owlplug-scanner-${{ env.version }}-linux-${{ matrix.arch }}
+        name: owlplug-scanner-${{ matrix.platform }}
+        path: ./Builds/LinuxMakefile/build/owlplug-scanner-${{ env.version }}-${{ matrix.platform }}
   release:
     name: "Release"
     needs: [build-win, build-osx, build-linux]
