@@ -5,4 +5,4 @@
 
 */
 
-#include <juce_audio_formats/juce_audio_formats.mm>
+#include <juce_audio_processors_headless/juce_audio_processors_headless_ara.cpp>
