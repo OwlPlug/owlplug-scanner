@@ -26,16 +26,14 @@ int main (int argc, char* argv[])
 	char* pluginPath = argv[1];
 
 	juce::AudioPluginFormatManager pluginFormatManager;
-	pluginFormatManager.addDefaultFormats();
-	juce::KnownPluginList plugList;
+	juce::addHeadlessDefaultFormatsToManager (pluginFormatManager);
 
 	// Array of plugin description
 	juce::OwnedArray<juce::PluginDescription> pluginDescriptions;
 
 	// For each managed format, we try to fill pluginDescriptions array.
 	for (int i = 0; i < pluginFormatManager.getNumFormats(); ++i) {
-		plugList.scanAndAddFile(pluginPath, false, pluginDescriptions,
-			*pluginFormatManager.getFormat(i));
+		pluginFormatManager.getFormat(i)->findAllTypesForFile(pluginDescriptions, pluginPath);
 	}
 
 	if (pluginDescriptions.size() == 0) {
